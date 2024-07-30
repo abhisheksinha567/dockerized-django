@@ -1,16 +1,19 @@
 import os
 from dotenv import load_dotenv
 
+# Load environment variables from .env file
+load_dotenv()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
+# Secret key
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = bool(int(os.getenv('DEBUG', False)))
+# Debug setting
+DEBUG = bool(int(os.getenv('DEBUG', '0')))
 
+# Allowed hosts
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(',') if os.getenv('ALLOWED_HOSTS') else []
-
 
 # Application definition
 INSTALLED_APPS = [
@@ -52,7 +55,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dockerizeddjango.wsgi.application'
 
-
 # Database
 DATABASES = {
     'default': {
@@ -64,7 +66,6 @@ DATABASES = {
         'NAME': os.getenv('POSTGRES_DB'),
     }
 }
-
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -82,7 +83,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 LANGUAGE_CODE = 'en-us'
 
@@ -94,14 +94,10 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-
 
 # Media files
 MEDIA_URL = '/media/'
-
 MEDIA_ROOT = os.path.join(BASE_DIR, "mediafiles")
